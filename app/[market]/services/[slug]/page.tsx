@@ -4,7 +4,7 @@ import { Check, Clock, ShieldCheck } from "lucide-react";
 import { services, markets, Market, money, getServices } from "@/lib/data";
 import OrderControls from "@/components/order-controls";
 import Gallery from "@/components/gallery";
-import ServiceCard from "@/components/service-card";
+import ServiceGrid from "@/components/service-grid";
 import type { Metadata } from "next";
 type Props = { params: Promise<{ market: Market; slug: string }> };
 
@@ -94,11 +94,7 @@ export default async function Detail({ params }: Props) {
         <span className="eyebrow green">BETTER TOGETHER</span>
         <h2>Complete your brand story.</h2>
         <p>Thoughtful additions from across the Branda ecosystem.</p>
-        <div className="service-grid">
-          {related.map((service) => (
-            <ServiceCard key={service.slug} service={service} market={market} />
-          ))}
-        </div>
+        <ServiceGrid services={related} market={market} />
       </section>
     </main>
   );

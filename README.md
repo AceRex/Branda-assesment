@@ -25,7 +25,7 @@ Open http://localhost:3000 (redirects to `/ng`). Development uses `.next-dev` an
 
 `lib/data.ts` defines typed services and market configuration. Its asynchronous `getServices()` function is the server-side data boundary; replace it with a cached API/database query without changing the page components. It currently resolves local mock data, so no external data service is required.
 
-Catalog and detail pages are Server Components. Browser interaction is isolated into header, gallery, ordering and cart Client Components. React Context is sufficient for the small cart domain and avoids an additional state dependency. Local storage persists the cart after hydration; a readiness flag prevents empty-cart flashes and accidental storage overwrites. No data-fetching library is needed because Next.js handles the server data boundary.
+Catalog and detail pages are Server Components. The catalog composes focused hero, category, filter, result-toolbar and pagination components from `components/catalog/`. `ServiceGrid` is shared by the catalog and service recommendations. Cart rows, totals and confirmation live in `components/cart/`, while `CartView` coordinates cart state. `lib/catalog.ts` owns search, sorting, pagination and URL construction. Browser interaction is isolated into header, gallery, ordering and cart Client Components. React Context is sufficient for the small cart domain and avoids an additional state dependency. Local storage persists the cart after hydration; a readiness flag prevents empty-cart flashes and accidental storage overwrites. No data-fetching library is needed because Next.js handles the server data boundary.
 
 Tailwind 4 is configured through its PostCSS plugin and imported globally. The visual theme uses reusable custom CSS classes and responsive breakpoints. Images are illustrative remote Unsplash photos and require internet access; production should replace these with service-specific, locally optimized imagery. Gallery views currently use different crops of the same product photograph.
 
@@ -42,4 +42,5 @@ Prices, discounts, delivery estimates, currency factors and tax rates are illust
 5. Add a different variation of the same service and verify separate line items.
 6. Change quantities, remove items, inspect subtotal/tax/total, then confirm a demo order.
 7. Check no-result searches, empty cart, invalid routes and mobile/tablet widths.
+
 # Branda-assesment
